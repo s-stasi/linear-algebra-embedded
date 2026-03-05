@@ -1,6 +1,9 @@
 #ifndef VECTOR_MATH_H
 #define VECTOR_MATH_H
 
+#define VECTOR2_VIEW(v2_ptr) (&(Vector_t){ .length = 2, .data = (float *)(v2_ptr) })
+#define VECTOR3_VIEW(v3_ptr) (&(Vector_t){ .length = 3, .data = (float *)(v3_ptr) })
+
 #include <stdint.h>
 #include <stdbool.h>
 
