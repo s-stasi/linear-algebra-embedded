@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #define MATRIX_MATH_IMPLEMENTATION
-#include "matrix_math.h"
+#include "../include/matrix_math.h"
 
 #define TOLERANCE 1e-4f
 

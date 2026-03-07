@@ -2,11 +2,11 @@
 #include <math.h>
 #include <stdbool.h>
 
-#include "../operation_state.h"
-#include "../matrix_math.h"
+#include "../include/operation_state.h"
+#include "../include/matrix_math.h"
 
 #define VECTOR_MATH_IMPLEMENTATION
-#include "../vector_math.h"
+#include "../include/vector_math.h"
 
 // Assertion macros
 #define ASSERT_TRUE(condition)                             \
