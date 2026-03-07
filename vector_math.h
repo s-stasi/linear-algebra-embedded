@@ -38,6 +38,7 @@ extern "C"
   OperationState_t vector_multiply_constant(const Vector_t *v, const float b, Vector_t *result);
   OperationState_t matrix_multiply_vector(const Matrix_t *A, const Vector_t *v, Vector_t *result);
   OperationState_t vector_multiply_matrix(const Vector_t *v, const Matrix_t *A, Vector_t *result);
+  OperationState_t vector_copy(const Vector_t *u, const Vector_t *v);
 
   /* Conversion Helpers */
   OperationState_t vector_to_matrix(const Vector_t *v, Matrix_t *M);
@@ -204,6 +205,16 @@ OperationState_t matrix_to_vector(const Matrix_t *M, Vector_t *v) {
 
   for (uint8_t i = 0; i < v->length; i++) {
     pV[i] = pM[i];
+  }
+
+  return ok;
+}
+
+OperationState_t vector_copy(const Vector_t *u, const Vector_t *v) {
+  if (u->length != v->length) return vector_wrong_dimension;
+
+  for (uint8_t i = 0; i < v->length; i++) {
+    v->data[i] = u->data[i];
   }
 
   return ok;
