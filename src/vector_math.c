@@ -1,7 +1,7 @@
 #include "../include/vector_math.h"
 #include "../include/operation_state.h"
 
-OperationState_t vector_dot_product(const Vector_t *u, const Vector_t *v, float *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_dot_product(const Vector_t *u, const Vector_t *v, float *result)) {
   if (u->length != v->length) return vector_wrong_dimension;
 
   *result = 0.0f;
@@ -26,7 +26,7 @@ OperationState_t vector_dot_product(const Vector_t *u, const Vector_t *v, float 
   return ok;
 }
 
-OperationState_t vector_outer_product(const Vector_t *u, const Vector_t *v, Matrix_t *C) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_outer_product(const Vector_t *u, const Vector_t *v, Matrix_t *C)) {
   if (C == NULL) return matrix_null;
   if (v->length != C->cols || u->length != C->rows) return matrix_wrong_dimensions;
 
@@ -43,7 +43,7 @@ OperationState_t vector_outer_product(const Vector_t *u, const Vector_t *v, Matr
   return ok;
 }
 
-OperationState_t matrix_multiply_vector(const Matrix_t *A, const Vector_t *v, Vector_t *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_multiply_vector(const Matrix_t *A, const Vector_t *v, Vector_t *result)) {
   if (A->cols != v->length || A->rows != result->length) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -63,7 +63,7 @@ OperationState_t matrix_multiply_vector(const Matrix_t *A, const Vector_t *v, Ve
   return ok;
 }
 
-OperationState_t vector_multiply_matrix(const Vector_t *v, const Matrix_t *A, Vector_t *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_multiply_matrix(const Vector_t *v, const Matrix_t *A, Vector_t *result)) {
   if (v->length != A->rows || result->length != A->cols) return matrix_wrong_dimensions;
 
   const float* __restrict pV = v->data;
@@ -83,7 +83,7 @@ OperationState_t vector_multiply_matrix(const Vector_t *v, const Matrix_t *A, Ve
   return ok;
 }
 
-OperationState_t vector_add(const Vector_t *u, const Vector_t *v, Vector_t *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_add(const Vector_t *u, const Vector_t *v, Vector_t *result)) {
   if (u->length != v->length || u->length != result->length) return vector_wrong_dimension;
 
   const float* __restrict pU = u->data;
@@ -97,7 +97,7 @@ OperationState_t vector_add(const Vector_t *u, const Vector_t *v, Vector_t *resu
   return ok;
 }
 
-OperationState_t vector_subtract(const Vector_t *u, const Vector_t *v, Vector_t *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_subtract(const Vector_t *u, const Vector_t *v, Vector_t *result)) {
   if (u->length != v->length || u->length != result->length) return vector_wrong_dimension;
 
   const float* __restrict pU = u->data;
@@ -111,7 +111,7 @@ OperationState_t vector_subtract(const Vector_t *u, const Vector_t *v, Vector_t 
   return ok;
 }
 
-OperationState_t vector_multiply_constant(const Vector_t *v, const float b, Vector_t *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_multiply_constant(const Vector_t *v, const float b, Vector_t *result)) {
   if (v->length != result->length) return vector_wrong_dimension;
 
   const float* __restrict pV = v->data;
@@ -124,7 +124,7 @@ OperationState_t vector_multiply_constant(const Vector_t *v, const float b, Vect
   return ok;
 }
 
-OperationState_t vector_to_matrix(const Vector_t *v, Matrix_t *M) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_to_matrix(const Vector_t *v, Matrix_t *M)) {
   // Controlliamo che la matrice di destinazione sia un vettore colonna Nx1
   if (M->rows != v->length || M->cols != 1) return matrix_wrong_dimensions;
 
@@ -138,7 +138,7 @@ OperationState_t vector_to_matrix(const Vector_t *v, Matrix_t *M) {
   return ok;
 }
 
-OperationState_t matrix_to_vector(const Matrix_t *M, Vector_t *v) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_to_vector(const Matrix_t *M, Vector_t *v)) {
   // La matrice deve essere una colonna (Nx1) o una riga (1xN)
   if ((M->cols != 1 && M->rows != 1) || (M->cols * M->rows != v->length)) {
     return vector_wrong_dimension;
@@ -154,7 +154,7 @@ OperationState_t matrix_to_vector(const Matrix_t *M, Vector_t *v) {
   return ok;
 }
 
-OperationState_t vector_copy(const Vector_t *u, const Vector_t *v) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t vector_copy(const Vector_t *u, const Vector_t *v)) {
   if (u->length != v->length) return vector_wrong_dimension;
 
   for (uint8_t i = 0; i < v->length; i++) {

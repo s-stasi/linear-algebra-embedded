@@ -1,7 +1,7 @@
 #include "../include/matrix_math.h"
 #include "../include/operation_state.h"
 
-OperationState_t matrix_set_zero(Matrix_t *A) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_set_zero(Matrix_t *A)) {
   float *pA = A->data;
 
   uint16_t dim = A->cols * A->rows;
@@ -13,7 +13,7 @@ OperationState_t matrix_set_zero(Matrix_t *A) {
   return ok;
 }
 
-OperationState_t matrix_set_identity(Matrix_t *A) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_set_identity(Matrix_t *A)) {
   if (A->cols != A->rows) return matrix_not_square;
 
   float *pA = A->data;
@@ -28,7 +28,7 @@ OperationState_t matrix_set_identity(Matrix_t *A) {
   return ok;
 }
 
-OperationState_t matrix_copy(const Matrix_t *A, Matrix_t *B) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_copy(const Matrix_t *A, Matrix_t *B)) {
   if (A->rows != B->rows || A->cols != B->cols) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -43,7 +43,7 @@ OperationState_t matrix_copy(const Matrix_t *A, Matrix_t *B) {
   return ok;
 }
 
-OperationState_t matrix_trace(const Matrix_t *A, float *result) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_trace(const Matrix_t *A, float *result)) {
   if (A->cols != A->rows) return matrix_not_square;
 
   const float* __restrict pA = A->data;
@@ -57,8 +57,7 @@ OperationState_t matrix_trace(const Matrix_t *A, float *result) {
   return ok;
 }
 
-OperationState_t matrix_add(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)
-{
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_add(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)) {
   if (A->cols != B->cols || A->rows != B->rows || C->cols != A->cols || C->rows != A->rows)
     return matrix_wrong_dimensions;
 
@@ -84,7 +83,7 @@ OperationState_t matrix_add(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)
   return ok;
 }
 
-OperationState_t matrix_add_constant(const Matrix_t *A, const float b, Matrix_t *C) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_add_constant(const Matrix_t *A, const float b, Matrix_t *C)) {
   if (A->cols != C->cols || A->rows != C->rows) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -99,8 +98,7 @@ OperationState_t matrix_add_constant(const Matrix_t *A, const float b, Matrix_t 
   return ok;
 }
 
-OperationState_t matrix_subtract(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)
-{
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_subtract(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)) {
   if (A->cols != B->cols || A->rows != B->rows || C->cols != A->cols || C->rows != A->rows)
     return matrix_wrong_dimensions;
 
@@ -126,7 +124,7 @@ OperationState_t matrix_subtract(const Matrix_t *A, const Matrix_t *B, Matrix_t 
   return ok;
 }
 
-OperationState_t matrix_multiply(const Matrix_t* A, const Matrix_t* B, Matrix_t* C) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_multiply(const Matrix_t* A, const Matrix_t* B, Matrix_t* C)) {
   if (A->cols != B->rows || C->rows != A->rows || C->cols != B->cols) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -151,7 +149,7 @@ OperationState_t matrix_multiply(const Matrix_t* A, const Matrix_t* B, Matrix_t*
   return ok;
 }
 
-OperationState_t matrix_multiply_elementwise(const Matrix_t *A, const Matrix_t *B, Matrix_t *C) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_multiply_elementwise(const Matrix_t *A, const Matrix_t *B, Matrix_t *C)) {
   if (A->cols != B->cols || A->rows != B->rows || A->cols != C->cols || A->rows != C->rows) return matrix_wrong_dimensions;
 
   uint16_t dim = A->cols * A->rows;
@@ -167,7 +165,7 @@ OperationState_t matrix_multiply_elementwise(const Matrix_t *A, const Matrix_t *
   return ok;
 }
 
-OperationState_t matrix_multiply_constant(const Matrix_t *A, const float b, Matrix_t *C) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_multiply_constant(const Matrix_t *A, const float b, Matrix_t *C)) {
   if (A->rows != C->rows || A->cols != C->cols) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -184,7 +182,7 @@ OperationState_t matrix_multiply_constant(const Matrix_t *A, const float b, Matr
   return ok;
 }
 
-OperationState_t matrix_determinant(const Matrix_t *A, float *result, Matrix_t *scratchBuffer) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_determinant(const Matrix_t *A, float *result, Matrix_t *scratchBuffer)) {
   if (A->cols != A->rows) return matrix_not_square;
 
   const float *pA = A->data;
@@ -268,7 +266,7 @@ OperationState_t matrix_determinant(const Matrix_t *A, float *result, Matrix_t *
   return ok;
 }
 
-OperationState_t matrix_inverse(const Matrix_t *A, Matrix_t *B, Matrix_t *scratchBuffer) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_inverse(const Matrix_t *A, Matrix_t *B, Matrix_t *scratchBuffer)) {
   if (A->rows != A->cols) return matrix_not_square;
   if (A->rows != B->rows || A->cols != B->cols) return matrix_wrong_dimensions;
 
@@ -377,7 +375,7 @@ OperationState_t matrix_inverse(const Matrix_t *A, Matrix_t *B, Matrix_t *scratc
   return ok;
 }
 
-OperationState_t matrix_transpose(const Matrix_t *A, Matrix_t *B) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_transpose(const Matrix_t *A, Matrix_t *B)) {
   if (A->rows != B->cols || A->cols != B->rows) return matrix_wrong_dimensions;
 
   const float* __restrict pA = A->data;
@@ -392,7 +390,7 @@ OperationState_t matrix_transpose(const Matrix_t *A, Matrix_t *B) {
   return ok;
 }
 
-OperationState_t matrix_transpose_self(Matrix_t *A) {
+LINEAR_ALGEBRA_QUICKACCESS_CODE(OperationState_t matrix_transpose_self(Matrix_t *A)) {
   if (A->rows != A->cols) return matrix_not_square; 
 
   float *pA = A->data;
